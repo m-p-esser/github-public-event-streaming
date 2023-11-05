@@ -108,3 +108,43 @@ Out of scope: This project not processing the following Events Types
 </tr>
 </tbody>
 </table>
+
+## <a name='Setup'></a>Setup
+
+### <a name='ActivatePre-commit'></a>Activate Pre-commit 
+Install Pre-commit hooks (for code formatting, import statement checks before committing)
+- `pre-commit install`
+
+### <a name='EnvironmentVariables'></a>Environment Variables
+Define values in `base.env` (not part of this repository)
+For reference check `base.env.example` which contains all major variables required for this project
+- TO-DO: Add base.env.example
+
+### <a name='GCPSetup'></a>GCP Setup
+Run `make setup-gcp` to setup up the Google Cloud Project
+
+If this doesn't work, run the commands from `00_setup_gcp.mk` command by command in the following order:
+- `make create-gcp-project`
+- `make set-default-gcp-project`
+- `make link-project-to-billing-account`
+- `make create-deployment-service-account`
+- `make create-deployment-service-account-key-file`
+- `make enable-gcp-services`
+- `make bind-iam-policies-to-deployment-service-account`
+- `make set-deployment-service-account-as-default`
+
+### <a name='EnvironmentSetup'></a>Environment Setup
+*necessary everytime you start working on the project*
+- `make env-init` to prepare ENV environment variable
+- `make dev-init` to setup development environment
+
+### <a name='DeploymentandTesting'></a>Deployment and Testing
+
+Start on `develop`
+- Write Tasks and Flows
+- If necessary write Unit Tests
+- Run Unit Tests
+
+Move on to `test`
+- Merge with `develop`
+- Run integration test
