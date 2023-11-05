@@ -7,7 +7,7 @@ from src.utils import load_env_vars
 
 
 def create_watch_subscription():
-    """Create Subscription in Google Pub/Sub"""
+    """Create Subscription for Watch events in Google Pub/Sub"""
     env_vars = load_env_vars()
     project_id = env_vars["GCP_PROJECT_ID"]
     environment = env_vars["ENV"]
