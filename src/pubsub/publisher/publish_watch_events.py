@@ -8,7 +8,7 @@ from src.utils import load_env_vars
 
 
 def publish_events():
-    """Publish Events to Google Pub/Sub Topic"""
+    """Publish Watch Events to Google Pub/Sub Topic"""
     env_vars = load_env_vars()
     project_id = env_vars["GCP_PROJECT_ID"]
     environment = env_vars["ENV"]
