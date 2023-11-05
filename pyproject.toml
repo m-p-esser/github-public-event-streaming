@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "github-public-event-streaming"
+version = "0.1.0"
+description = ""
+authors = ["Marc-Philipp Esser <m-esser@mail.de>"]
+readme = "README.md"
+packages = [
+    {include = "src"}
+    ]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ghapi = "^1.0.4"
+jupyter = "^1.0.0"
+python-dotenv = "^1.0.0"
+google-cloud-pubsub = "^2.18.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+pre-commit = "^3.3.3"
+pytest = "^7.4.0"
+isort = "^5.12.0"
+interrogate = "^1.5.0"
+autoflake = "^2.2.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
