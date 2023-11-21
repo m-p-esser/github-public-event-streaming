@@ -1,13 +1,18 @@
 """ Misc utility functions """
 import re
 
-from dotenv import dotenv_values
+from dotenv import dotenv_values, find_dotenv
 
 
 def load_env_vars() -> dict:
     """Load environment variables from file and store as dict"""
-    env_vars = dotenv_values("./make/base.env")
-    environment = dotenv_values("./make/.env")  # dev, test or prod
+    base_env_file = find_dotenv(
+        filename="base.env", raise_error_if_not_found=True, usecwd=True
+    )
+    env_vars = dotenv_values(base_env_file)
+
+    env_file = find_dotenv(filename=".env", raise_error_if_not_found=True, usecwd=True)
+    environment = dotenv_values(env_file)  # dev, test or prod
     env_vars.update(environment)
     if len(environment) > 0:
         env_vars.update(environment)
