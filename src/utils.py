@@ -4,14 +4,16 @@ import re
 from dotenv import dotenv_values, find_dotenv
 
 
-def load_env_vars() -> dict:
+def load_env_vars(env_file_names: list[str] = ["base.env", ".env"]) -> dict:
     """Load environment variables from file and store as dict"""
     base_env_file = find_dotenv(
-        filename="base.env", raise_error_if_not_found=True, usecwd=True
+        filename=env_file_names[0], raise_error_if_not_found=True, usecwd=True
     )
     env_vars = dotenv_values(base_env_file)
 
-    env_file = find_dotenv(filename=".env", raise_error_if_not_found=True, usecwd=True)
+    env_file = find_dotenv(
+        filename=env_file_names[1], raise_error_if_not_found=True, usecwd=True
+    )
     environment = dotenv_values(env_file)  # dev, test or prod
     env_vars.update(environment)
     if len(environment) > 0:
