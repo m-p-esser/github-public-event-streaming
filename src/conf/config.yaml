@@ -1,0 +1,22 @@
+params:
+  event_types:
+    - CommitCommentEvent
+    - CreateEvent
+    - DeleteEvent
+    - ForkEvent
+    - GollumEvent
+    - IssueCommentEvent
+    - IssuesEvent
+    - MemberEvent
+    - PublicEvent
+    - PushEvent
+    - PullRequestEvent
+    - PullRequestReviewEvent
+    - PullRequestReviewCommentEvent
+    - PullRequestReviewThreadEvent
+    - ReleaseEvent
+    - SponsorshipEvent
+    - WatchEvent
+  active_event_type: WatchEvent
+
+
