@@ -1,4 +1,4 @@
-""" Subscriber for Github Watch Events """
+""" Subscriber for Github Events """
 
 from google.cloud import pubsub_v1
 from icecream import ic
@@ -6,17 +6,16 @@ from icecream import ic
 from src.utils import load_env_vars
 
 
-def create_watch_subscription():
-    """Create Subscription for Watch events in Google Pub/Sub"""
-    env_vars = load_env_vars()
-    project_id = env_vars["GCP_PROJECT_ID"]
-    environment = env_vars["ENV"]
+def create_subscription():
+    """Create Subscription for Github events in Google Pub/Sub"""
 
     publisher = pubsub_v1.PublisherClient()
     subscriber = pubsub_v1.SubscriberClient()
 
-    topic_path = publisher.topic_path(project_id, f"events-{environment}")
-    subscription_path = subscriber.subscription_path(project_id, f"watch-{environment}")
+    topic_path = publisher.topic_path(project_id, f"github-events-{environment}")
+    subscription_path = subscriber.subscription_path(
+        project_id, f"github-events-{environment}"
+    )
 
     with subscriber:
         try:
@@ -29,4 +28,7 @@ def create_watch_subscription():
 
 
 if __name__ == "__main__":
-    create_watch_subscription()
+    env_vars = load_env_vars()
+    project_id = env_vars["GCP_PROJECT_ID"]
+    environment = env_vars["ENV"]
+    create_subscription()
