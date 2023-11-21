@@ -50,6 +50,7 @@ bind-iam-policies-to-deployment-service-account: ## Bind IAM Policies to Service
 		gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member=serviceAccount:$(GCP_DEPLOYMENT_SERVICE_ACCOUNT)@$(GCP_PROJECT_ID).iam.gserviceaccount.com --role="roles/$$role"; \
 		echo $$role assigned to Service Account $(GCP_DEPLOYMENT_SERVICE_ACCOUNT); \
 	done 
+	gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member=serviceAccount:service-$(GCP_PROJECT_NUMBER)@gcp-sa-pubsub.iam.gserviceaccount.com --role="roles/storage.admin";
 # Grant your Google Account a role that lets you use the service account's roles and attach the service account to other resources:
 	gcloud iam service-accounts add-iam-policy-binding $(GCP_DEPLOYMENT_SERVICE_ACCOUNT)@$(GCP_PROJECT_ID).iam.gserviceaccount.com --member="user:emarcphilipp@gmail.com" --role=roles/iam.serviceAccountUser
 
