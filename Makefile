@@ -60,10 +60,10 @@ MAKEFLAGS += --no-print-directory
 endif
 
 # Include Default variables
-include make/base.env
+include base.env
 
 # Include info about environment
--include make/.env
+-include .env
 
 # Common variable to pass arbitrary options to targets
 ARGS?= 
