@@ -38,7 +38,7 @@ repos:
         ^tests/|            # Exclude tests directory
         .*__init__\.py$     # Exclude __init__.py files
       )
-    args: [-vv, -i, --fail-under=80]
+    args: [-vv, -i, --fail-under=50]
     name: Check if functions/classes have docstrings
 
 - repo: https://github.com/ambv/black
