@@ -1,5 +1,5 @@
 # Secrets
-**/*.env*
+*.env*
 !make/base.env.example
 !make/.env.example
 .idea
