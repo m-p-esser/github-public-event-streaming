@@ -20,19 +20,19 @@ env-init: ## Initialize environment, required everytime before the development p
 	case $(current_branch) in \
 		"develop") \
 			echo "Development branch"; \
-			echo "ENV=dev" > make/.env; \
+			echo "ENV=dev" > .env; \
 			;; \
 		"test") \
 			echo "Test branch"; \
-			echo "ENV=test" > make/.env; \
+			echo "ENV=test" > .env; \
 			;; \
 		"master") \
 			echo "Production branch"; \
-			echo "ENV=prod" > make/.env; \
+			echo "ENV=prod" > .env; \
 			;; \
 		*) \
 			echo "Unknown branch, using default values"; \
-			echo "ENV=dev" > make/.env; \
+			echo "ENV=dev" > .env; \
 			;; \
 	esac;
 
