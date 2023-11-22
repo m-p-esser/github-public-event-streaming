@@ -1,3 +1,5 @@
+##@ [Prefect: Setup]
+
 .PHONY: create-prefect-blocks
 create-prefect-blocks: ## Create Prefect Blocks
 	make env-init
