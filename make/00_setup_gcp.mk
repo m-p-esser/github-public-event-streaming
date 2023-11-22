@@ -41,12 +41,13 @@ enable-gcp-services: ## Enable GCP services
 	gcloud services enable \
 		artifactregistry.googleapis.com \
 		run.googleapis.com \
-		cloudresourcemanager.googleapis.com
+		cloudresourcemanager.googleapis.com \
+		compute.googleapis.com
 
 .PHONY: bind-iam-policies-to-deployment-service-account
 bind-iam-policies-to-deployment-service-account: ## Bind IAM Policies to Service Account
 	@echo "Bind IAM Policies to Service account $(GCP_DEPLOYMENT_SERVICE_ACCOUNT)"
-	for role in artifactregistry.admin iam.serviceAccountUser storage.objectAdmin storage.admin bigquery.admin pubsub.admin; do \
+	for role in artifactregistry.admin iam.serviceAccountUser storage.objectAdmin storage.admin bigquery.admin pubsub.admin compute.admin; do \
 		gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member=serviceAccount:$(GCP_DEPLOYMENT_SERVICE_ACCOUNT)@$(GCP_PROJECT_ID).iam.gserviceaccount.com --role="roles/$$role"; \
 		echo $$role assigned to Service Account $(GCP_DEPLOYMENT_SERVICE_ACCOUNT); \
 	done 
