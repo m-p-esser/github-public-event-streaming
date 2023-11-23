@@ -12,6 +12,8 @@ from src.utils import load_env_vars, pascal_case_to_lower_case_with_hyphen
 
 
 def construct_storage_client(account_file_path: pathlib.Path) -> storage.Client:
+    """Construct Storage Client"""
+
     credentials = service_account.Credentials.from_service_account_file(
         account_file_path,
         scopes=["https://www.googleapis.com/auth/cloud-platform"],
@@ -25,6 +27,8 @@ def construct_storage_client(account_file_path: pathlib.Path) -> storage.Client:
 def create_bucket(
     storage_client: storage.Client, bucket: str, location: str, config: dict
 ) -> storage.Bucket:
+    """Create GCS Bucket"""
+
     bucket = storage_client.bucket(bucket)
     bucket.add_lifecycle_delete_rule(
         age=config["lifecycle_delete_rule_age"]
