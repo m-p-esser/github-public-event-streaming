@@ -15,7 +15,7 @@ def pull_events():
 
     subscriber = pubsub_v1.SubscriberClient()
     subscription_path = subscriber.subscription_path(
-        project_id, f"events-{environment}"
+        project_id, f"github-event-{environment}"
     )
 
     with subscriber:
