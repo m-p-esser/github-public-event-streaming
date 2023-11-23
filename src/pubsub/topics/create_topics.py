@@ -12,7 +12,7 @@ def create_topics():
 
     publisher = pubsub_v1.PublisherClient()
 
-    topics_paths = [publisher.topic_path(project_id, f"github-events-{environment}")]
+    topics_paths = [publisher.topic_path(project_id, f"github-event-{environment}")]
     for topic_path in topics_paths:
         try:
             topic = publisher.create_topic(request={"name": topic_path})
