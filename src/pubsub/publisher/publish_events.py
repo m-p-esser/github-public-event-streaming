@@ -32,8 +32,10 @@ def send_message(event, publisher, topic_path, event_type):
     message = str(event).encode("utf-8")
     ic(message)
 
-    # publish_future = publisher.publish(topic=topic_path, data=message, event_type=event_type)
-    # ic(publish_future.result())
+    publish_future = publisher.publish(
+        topic=topic_path, data=message, event_type=event_type
+    )
+    ic(publish_future.result())
 
 
 @flow
