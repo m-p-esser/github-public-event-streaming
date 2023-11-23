@@ -18,5 +18,9 @@ params:
     - SponsorshipEvent
     - WatchEvent
   active_event_type: WatchEvent
+  
+gcs_bucket_config:
+  storage_class: NEARLINE
+  lifecycle_delete_rule_age: 7 # Number of Days
 
 
