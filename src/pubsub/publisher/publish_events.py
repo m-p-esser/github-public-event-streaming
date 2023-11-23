@@ -1,34 +1,46 @@
 """ Publisher for Github Watch Events """
 
-import hydra
 from ghapi.all import GhApi
 from google.cloud import pubsub_v1
 from icecream import ic
+from prefect.task_runners import ConcurrentTaskRunner
 
+from prefect import flow, task
 from src.utils import load_env_vars, pascal_case_to_lower_case_with_hyphen
 
 
-@hydra.main(config_path="../../conf", config_name="config")
-def publish_events(cfg):
-    """Publish Events to Google Pub/Sub Topic"""
-
-    event_type = cfg["params"]["active_event_type"]
-    event_type_lowercase_hyphen = pascal_case_to_lower_case_with_hyphen(event_type)
+@flow(task_runner=ConcurrentTaskRunner())
+def fetch_events():
+    """Fetch Events from Github Events API"""
 
     publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(project_id, f"github-event-{environment}")
+
     ghapi = GhApi(token=github_token)
+    events = ghapi.fetch_events(n_pages=3, pause=3, per_page=10)
 
-    topic_path = publisher.topic_path(project_id, f"github-events-{environment}")
+    for e in events:
+        event_type = e["type"]
+        event_type_lowercase_hyphen = pascal_case_to_lower_case_with_hyphen(event_type)
+        send_message.submit(e, publisher, topic_path, event_type_lowercase_hyphen)
 
-    events = ghapi.fetch_events(types=event_type)
-    for i in events:
-        message = str(i).encode("utf-8")
-        ic(message)
 
-        publish_future = publisher.publish(
-            topic=topic_path, data=message, event_type=event_type_lowercase_hyphen
-        )
-        ic(publish_future.result())
+@task
+def send_message(event, publisher, topic_path, event_type):
+    """Publish Events as messages to Google Pub/Sub Topic"""
+
+    message = str(event).encode("utf-8")
+    ic(message)
+
+    # publish_future = publisher.publish(topic=topic_path, data=message, event_type=event_type)
+    # ic(publish_future.result())
+
+
+@flow
+# @hydra.main(config_path="../../conf", config_name="config")
+def publish_events():
+    """Publish Events to Google Pub/Sub Topic"""
+    fetch_events()
 
 
 if __name__ == "__main__":
