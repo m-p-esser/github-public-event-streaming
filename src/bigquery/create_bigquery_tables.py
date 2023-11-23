@@ -12,6 +12,8 @@ from src.utils import load_env_vars, pascal_case_to_lower_case_with_hyphen
 
 
 def construct_bigquery_client(account_file_path, location) -> bigquery.Client:
+    """Construct Bigquery Client"""
+
     credentials = service_account.Credentials.from_service_account_file(
         account_file_path,
         scopes=["https://www.googleapis.com/auth/cloud-platform"],
