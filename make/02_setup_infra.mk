@@ -2,7 +2,7 @@
 
 .PHONY: create-gcs-buckets
 create-gcs-buckets: ### Create Google Cloud Storage Buckets
-	for event_type in watch-events push-events; do \
+	for event_type in watch-event push-event; do \
 		gsutil mb -c standard -l ${GCP_DEFAULT_REGION} gs://github-$$event_type-$(ENV) || true; \
 	done
 
