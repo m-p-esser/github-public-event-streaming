@@ -2,6 +2,10 @@
 
 # Github Public Event Streaming
 
+> 🚧 Info
+> 
+> This Project is currently on hold
+
 ## Goal
 Goal of this project is to create a Realtime Dashboard in Google Data Studio which shows current trends on Github in the areas of Data Engineering and Data Science
 
